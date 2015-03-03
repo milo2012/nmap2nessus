@@ -34,3 +34,22 @@ sudo python nmap2ness.py -u root -p 1234 -i nmapt_target.xml -s 127.0.0.1
 - Checking Job Status: 224 : canceled
 - Nessus report has been saved to: report.csv
 ```
+
+sudo python nmap2ness.py -u root -p 1234 -n 224
+```
+- Logging into Nessus
+- Starting Nessus Scan
+- Checking Job Status: 224 : running
+- Checking Job Status: 224 : running
+- Checking Job Status: 224 : running
+- Checking Job Status: 224 : running
+- Checking Job Status: 224 : running
+- Checking Job Status: 224 : running
+- Checking Job Status: 224 : paused
+- Checking Job Status: 224 : paused
+- Checking Job Status: 224 : paused
+- Checking Job Status: 224 : paused
+- Checking Job Status: 224 : paused
+- Checking Job Status: 224 : canceled
+- Nessus report has been saved to: report.
+```
