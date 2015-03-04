@@ -67,7 +67,7 @@ Medium     176.28.50.165:995      SSLv3 Padding Oracle On Downgraded Legacy Encr
 
 - Nessus report has been saved to: report.csv
 ```
-  
+#If you have started a Nessus job but the scripts accidentally gets terminated, you can connect back to the Nessus server by specifying the Scan_ID using the -n parameter    
 sudo python nmap2ness.py -u root -p 1234 -n 224
 ```
 - Logging into Nessus
