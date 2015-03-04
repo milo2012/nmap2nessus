@@ -5,11 +5,11 @@ usage: nmap2ness.py [-h] [-s HOSTIP] [-n SCANID] [-u USERNAME] [-p PASSWORD]
 optional arguments:
   -h, --help   show this help message and exit
   -s HOSTIP    [nessus server IP]
-  -n SCANID    [lookup job based on scan_id]
   -u USERNAME  [username]
   -p PASSWORD  [password]
   -i INFILE    [nmap xml file]
-  -o OUTFILE   [nessus report (csv)]
+  -n SCANID    [lookup job based on scan_id (optional)]
+  -o OUTFILE   [nessus report (csv) (optional)]
 ```  
     
 #####Start a nessus scan by connecting to Nessus server 127.0.0.1  
