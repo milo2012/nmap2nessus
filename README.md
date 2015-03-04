@@ -67,11 +67,19 @@ Medium     176.28.50.165:995      SSLv3 Padding Oracle On Downgraded Legacy Encr
 
 - Nessus report has been saved to: report.csv
 ```
+<<<<<<< HEAD
   
   
 sudo python nmap2ness.py -u root -p 1234 -n 224  
 ```
 - Logging into Nessus
+=======
+
+sudo python nmap2ness.py -u root -p 1234 -n 224
+```
+- Logging into Nessus
+- Starting Nessus Scan
+>>>>>>> 53cf76949a950ccccfbfdaebfd06ed84d71d4946
 - Checking Job Status: 224 : running
 - Checking Job Status: 224 : running
 - Checking Job Status: 224 : running
@@ -84,6 +92,7 @@ sudo python nmap2ness.py -u root -p 1234 -n 224
 - Checking Job Status: 224 : paused
 - Checking Job Status: 224 : paused
 - Checking Job Status: 224 : canceled
+<<<<<<< HEAD
 
 - Summary of Results (Critical/High/Medium)
 Critical   176.28.50.165:80                                                PHP Unsupported Version Detection
@@ -120,3 +129,7 @@ Medium     176.28.50.165:995      SSLv3 Padding Oracle On Downgraded Legacy Encr
 - Nessus report has been saved to: report.csv
 ```
 
+=======
+- Nessus report has been saved to: report.
+```
+>>>>>>> 53cf76949a950ccccfbfdaebfd06ed84d71d4946
