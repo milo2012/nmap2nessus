@@ -12,6 +12,7 @@ optional arguments:
   -o OUTFILE   [nessus report (csv)]
 ```  
     
+#####Start a nessus scan by connecting to Nessus server 127.0.0.1  
 sudo python nmap2ness.py -u root -p 1234 -i nmapt_target.xml -s 127.0.0.1  
 ```
 - Launching new Nessus scan
