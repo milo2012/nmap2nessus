@@ -230,23 +230,21 @@ if __name__== '__main__':
 
 		results = download_report(file_id,scan_id,"csv",token)
 		
-		reportFile = "report.csv"
-		parseNmapReport(reportFile)
-
-		if "requested file was not found" not in results:
-			if options.outfile:
-				#results = download_report(file_id,scan_id,"csv",token)
-				file = open(options.outfile, "w")
-				file.write(results.encode('ascii', 'ignore').decode('ascii'))
-				file.close()
-				print "\n- Nessus report has been saved to: "+options.outfile
-			else:
-				outfile = "report.csv"
-				#results = download_report(file_id,scan_id,"csv",token)
-				file = open("report.csv", "w")
-				file.write(results.encode('ascii', 'ignore').decode('ascii'))
-				file.close()
-				print "\n- Nessus report has been saved to: report.csv"
+		if options.outfile:
+			#results = download_report(file_id,scan_id,"csv",token)
+			file = open(options.outfile, "w")
+			file.write(results.encode('ascii', 'ignore').decode('ascii'))
+			file.close()
+			print "\n- Nessus report has been saved to: "+options.outfile
+			parseNmapReport(options.outfile)
+		else:
+			outfile = "report.csv"
+			#results = download_report(file_id,scan_id,"csv",token)
+			file = open("report.csv", "w")
+			file.write(results.encode('ascii', 'ignore').decode('ascii'))
+			file.close()
+			print "\n- Nessus report has been saved to: report.csv"
+			parseNmapReport(outfile)
 		sys.exit()
 	if options.infile:
 		username = options.username
