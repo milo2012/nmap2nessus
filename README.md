@@ -13,6 +13,7 @@ optional arguments:
 ```  
     
 - Start a nessus scan by connecting to Nessus server 127.0.0.1  
+
 sudo python nmap2ness.py -u root -p 1234 -i nmapt_target.xml -s 127.0.0.1  
 ```
 - Launching new Nessus scan
@@ -69,6 +70,7 @@ Medium     176.28.50.165:995      SSLv3 Padding Oracle On Downgraded Legacy Encr
 - Nessus report has been saved to: report.csv
 ```
 - If you have started a Nessus job but the scripts accidentally gets terminated, you can connect back to the Nessus server by specifying the Scan_ID using the -n parameter    
+
 sudo python nmap2ness.py -u root -p 1234 -n 224
 ```
 - Logging into Nessus
