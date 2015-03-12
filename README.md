@@ -7,6 +7,7 @@ optional arguments:
   -s HOSTIP    [nessus server IP]
   -u USERNAME  [username]
   -p PASSWORD  [password]
+  -t TEMPLATEFILE  [Nessus template name to use]
   -i INFILE    [nmap xml file]
   -n SCANID    [lookup job based on scan_id (optional)]
   -o OUTFILE   [nessus report (csv) (optional)]
