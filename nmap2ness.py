@@ -303,12 +303,18 @@ if __name__== '__main__':
 		token = login(username,password)
 	
 		if options.templatefile:
+			foundPolicy=False
 			results = list_policy(token)
         	        for x in results['policies']:
 				if options.templatefile==x['name']:
 					policy_id =  x['id']
 					defaultNessusPolicy = get_policy(policy_id,token)
 					modifyPolicy(portsStr)
+					foundPolicy=True
+			if foundPolicy==False:
+				print "- Cannot find Nessus policy name"
+				sys.exit()
+
 
 		print "- Uploading Policy"
 		filename = upload_file(filename,token)
