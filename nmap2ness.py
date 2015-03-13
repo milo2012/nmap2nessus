@@ -219,8 +219,8 @@ if __name__== '__main__':
     	parser.add_argument('-s', dest='hostIP', action='store', help='[nessus server IP]')  
     	parser.add_argument('-u', dest='username', action='store', help='[username]')  
     	parser.add_argument('-p', dest='password', action='store', help='[password]')  
-    	parser.add_argument('-t', dest='templatefile', action='store', help='[Nessus template name to use]')  
     	parser.add_argument('-i', dest='infile', action='store', help='[nmap xml file]')  
+    	parser.add_argument('-t', dest='templatefile', action='store', help='[Nessus policy template to use (optional)]')  
     	parser.add_argument('-n', dest='scanid', action='store', help='[lookup job based on scan_id (optional)]')  
     	parser.add_argument('-o', dest='outfile', action='store', help='[nessus report (csv) (optional)]')  
 
