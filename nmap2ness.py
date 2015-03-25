@@ -31,6 +31,7 @@ def parseNmapReport(reportFile):
 	highList=[]
 	mediumList=[]
 
+        print reportFile
 	with open(reportFile, 'rb') as csvfile:
 		reader = csv.DictReader(csvfile,delimiter=',')
 		for row in reader:
@@ -47,6 +48,9 @@ def parseNmapReport(reportFile):
 						mediumList.append(result)
 	
 	print "\n- Summary of Results (Critical/High/Medium)"
+	if len(criticalList)<1 and len(highList)<1 and len(mediumList)<1:
+		print "- No results found"
+
 	criticalList = sorted(criticalList, key=operator.itemgetter(0, 1))
 	for x in criticalList:
 		print "%-10s %15s %80s" % (x[0], x[1], x[2])
@@ -346,13 +350,16 @@ if __name__== '__main__':
 		if options.outfile:
 			results = download_report(file_id,scan_id,"csv",token)
 			file = open(options.outfile, "w")
-			file.write(results)
+			file.write(results.encode('ascii', 'ignore').decode('ascii'))
 			file.close()
 			print "- Nessus report has been saved to: "+options.outfile
+			parseNmapReport(options.outfile)
+
 		else:
 			outfile = "report.csv"
 			results = download_report(file_id,scan_id,"csv",token)
 			file = open("report.csv", "w")
-			file.write(results)
+			file.write(results.encode('ascii', 'ignore').decode('ascii'))
 			file.close()
 			print "- Nessus report has been saved to: report.csv"
+			parseNmapReport(outfile)
