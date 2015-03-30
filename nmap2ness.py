@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import urllib
 import argparse
 import operator
