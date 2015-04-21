@@ -1,3 +1,9 @@
+Prerequisites  
+```
+pip install requests --upgrade
+```  
+  
+
 sudo python nmap2ness.py -h
 usage: nmap2ness.py [-h] [-s HOSTIP] [-n SCANID] [-u USERNAME] [-p PASSWORD]
                     [-i INFILE] [-o OUTFILE]
