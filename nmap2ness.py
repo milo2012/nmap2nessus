@@ -118,6 +118,11 @@ def list_policy(token):
 	data = json.loads(r.text)
 	return data
 
+def delete_policy(token,policy_id):
+	headers=setHeaders(contentType="json",token=token)
+	url = origUrl+"/policies/"+str(policy_id)
+	r = requests.delete(url = url, headers=headers, verify=verify)
+
 #def list_policy(token):
 #	headers=setHeaders(contentType="json",token=token)
 #	url = origUrl+"/policies"
@@ -347,6 +352,9 @@ if __name__== '__main__':
 
 		results = request_report(scan_id,"csv",token)
 		file_id = results['file']
+
+		print "- Deleting Temp Nessus Policy"
+		delete_policy(token,policy_id)
 
 		if options.outfile:
 			results = download_report(file_id,scan_id,"csv",token)
