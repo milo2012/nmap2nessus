@@ -230,6 +230,7 @@ if __name__== '__main__':
     	parser.add_argument('-u', dest='username', action='store', help='[username]')  
     	parser.add_argument('-p', dest='password', action='store', help='[password]')  
     	parser.add_argument('-i', dest='infile', action='store', help='[nmap xml file]')  
+    	parser.add_argument('-T', dest='targetHost', action='store', help='[target IP address/range]')  
     	parser.add_argument('-t', dest='templatefile', action='store', help='[Nessus policy template to use (optional)]')  
     	parser.add_argument('-n', dest='scanid', action='store', help='[lookup job based on scan_id (optional)]')  
     	parser.add_argument('-o', dest='outfile', action='store', help='[nessus report (csv) (optional)]')  
@@ -289,6 +290,83 @@ if __name__== '__main__':
 			print "\n- Nessus report has been saved to: report.csv"
 			parseNmapReport(outfile)
 		sys.exit()
+	if options.targetHost:
+		username = options.username
+		password = options.password
+
+		print "- Launching new Nessus scan"
+		resultStr=""
+		
+		portsStr="1-65535"
+		portsStr="80"
+		print "- Modifying Nessus policy"
+		filename="nessusPolicy.xml"
+		filename = modifyPolicy(portsStr)
+		
+		print "- Logging into Nessus"
+		token = login(username,password)
+	
+		if options.templatefile:
+			foundPolicy=False
+			results = list_policy(token)
+        	        for x in results['policies']:
+				if options.templatefile==x['name']:
+					policy_id =  x['id']
+					defaultNessusPolicy = get_policy(policy_id,token)
+					modifyPolicy(portsStr)
+					foundPolicy=True
+			if foundPolicy==False:
+				print "- Cannot find Nessus policy name"
+				sys.exit()
+
+
+		print "- Uploading Policy"
+		filename = upload_file(filename,token)
+		if filename!=None:	
+			(uuid,policy_id) = import_policy(filename,token)
+
+		targets = options.targetHost
+		results = add_scan(uuid,policy_id,targets,token)
+		
+		uuid = results['scan']['uuid']
+		scan_id = results['scan']['id']
+		
+		print "- Starting Nessus Scan"
+		start_scan(uuid,scan_id,token)
+
+		found=False
+		while found==False:
+			results=list_scans(token)
+			for x in results['scans']:
+				if str(x['id'])==str(scan_id):
+					print "- Checking Job Status: "+str(scan_id)+" : "+str(x['status'])
+					if x['status']=='canceled' or x['status']=='completed':
+						found=True
+			time.sleep(5)
+
+		results = request_report(scan_id,"csv",token)
+		file_id = results['file']
+
+		print "- Deleting Temp Nessus Policy"
+		delete_policy(token,policy_id)
+
+		if options.outfile:
+			results = download_report(file_id,scan_id,"csv",token)
+			file = open(options.outfile, "w")
+			file.write(results.encode('ascii', 'ignore').decode('ascii'))
+			file.close()
+			print "- Nessus report has been saved to: "+options.outfile
+			parseNmapReport(options.outfile)
+
+		else:
+			outfile = "report.csv"
+			results = download_report(file_id,scan_id,"csv",token)
+			file = open("report.csv", "w")
+			file.write(results.encode('ascii', 'ignore').decode('ascii'))
+			file.close()
+			print "- Nessus report has been saved to: report.csv"
+			parseNmapReport(outfile)
+
 	if options.infile:
 		username = options.username
 		password = options.password
@@ -308,7 +386,7 @@ if __name__== '__main__':
 		print "- Modifying Nessus policy"
 		filename="nessusPolicy.xml"
 		filename = modifyPolicy(portsStr)
-		
+
 		print "- Logging into Nessus"
 		token = login(username,password)
 	
